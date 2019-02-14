@@ -67,7 +67,7 @@
 - Framework de Diseño [Bootstrap 4](https://getbootstrap.com/).
 - Base de Datos [Mongo DB](https://www.mongodb.com/es).
 - Contenedor [Docker](https://www.docker.com/).
-# 3. Desplegar en el DCA
+# 3. Desplegar en el DCA y en AWS
 
 ## Instalación
 
