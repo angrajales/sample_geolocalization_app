@@ -29,9 +29,9 @@ require('./config/passport')(passport);
 
 // Settings
 if(process.env.AWS){
-    app.set('port', 80);    
+    app.set('port', 3000);    
 }else{
-    app.set('port', process.env.PORT || 80);
+    app.set('port', process.env.PORT || 3000);
 }
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -60,6 +60,6 @@ require('./app/services')(app, passport);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.listen(app.get('port'), '0.0.0.0', () => {
+app.listen(app.get('port'), () => {
     console.log(`Sever running at ${app.get('port')}`);
 });

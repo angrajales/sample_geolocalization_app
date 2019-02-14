@@ -6,6 +6,8 @@ LABEL maintainer="Anderson Grajales - agrajal7@eafit.edu.co"
 
 ARG PORT=3000
 ENV PORT $PORT
+ENV AWS=1
+
 
 RUN mkdir geolocalization_app
 
