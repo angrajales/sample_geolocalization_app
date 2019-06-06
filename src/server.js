@@ -31,9 +31,9 @@ require('./config/passport')(passport);
 
 // Settings
 if(process.env.AWS){
-    app.set('port', 3000);    
+    app.set('port', 80);    
 }else{
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 80);
 }
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
