@@ -1,54 +1,87 @@
 const Location = require('./models/location');
 const LocationControler = require('./controllers/location-controller');
+const secured = require('../config/passport');
+var URL = require('url').URL;
+var util = require('util');
+var querystring = require('querystring');
+
+
 module.exports = (app, passport) => {
     app.get('/', (req, res) => {
         res.render('index');
     });
-    app.get('/login', (req, res) => {
-        res.render('login', {
-            message: req.flash('loginMessage')
-        });
+    app.get('/login', passport.authenticate('auth0', {
+        scope: 'openid email profile'
+    }), (req, res) => {
+        res.redirect('/');
     });
+    app.get('/callback', (req, res, next) => {
+        passport.authenticate('auth0', function (err, user, info) {
+            if (err) { return next(err); }
+            if (!user) { return res.redirect('/login'); }
+            req.logIn(user, function (err) {
+                if (err) { return next(err); }
+                const returnTo = req.session.returnTo;
+                delete req.session.returnTo;
+                res.redirect(returnTo || '/location');
+            });
+        })(req, res, next);
+    });
+    app.get('/logout', (req, res) => {
+        req.logout();
+        var returnTo = req.protocol + '://' + req.hostname;
+        var port = req.connection.localPort;
+        if (port !== undefined && port !== 80 && port !== 443) {
+            returnTo += ':' + port;
+        }
+        var logoutURL = new URL(
+            util.format('https://%s/v2/logout', "dev-1dbrzis6.auth0.com")
+        );
+        var searchString = querystring.stringify({
+            client_id: "b5699POFj7hTQveOTmaDU4DCYieZHQzU",
+            returnTo: returnTo
+        });
+        logoutURL.search = searchString;
+        res.redirect(logoutURL);
+      });
     //app.post('/login', passport.authenticate('local-login'));
-    app.get('/signup', (req, res) => {
+    /*app.get('/signup', (req, res) => {
         res.render('signup', {
             message: req.flash('signupMessage')
         });
-    });
-    app.post('/signup', passport.authenticate('local-signup', {
+    });*/
+    /*app.post('/signup', passport.authenticate('auth0-signup', {
         successRedirect: '/location',
         failureRedirect: '/signup',
         failureFlash: true
-    }));
+    }));*/
 
-    app.post('/login', passport.authenticate('local-signin', {
+    /*app.post('/login', passport.authenticate('auth0-signin', {
         successRedirect: '/location',
         failureRedirect: '/login',
         failureFlash: true
-    }));
+    }));*/
 
-    app.get('/location', isLoggedIn, (req, res) => {
-        LocationControler.findLocation(req.user.local.email, (err, locs) => {
+    app.get('/location', secured(), (req, res) => {
+        
+        const { _raw, _json, ...userProfile } = req.user;
+        res.locals.user = _json;
+        LocationControler.findLocation(_json.email, (err, locs) => {
             if(err){
                 res.render('location', {
-                    user: req.user,
+                    user: res.locals.user,
                     locations: []
                 });
             }else {
                 console.log(locs);
                 res.render('location', {
-                    user: req.user,
+                    user: res.locals.user,
                     locations: JSON.stringify(locs)
                 });
             }
         });
     });
-    app.get('/logout', (req, res) => {
-        req.logout();
-        res.redirect('/');
-    });
-
-    app.post('/location/register', isLoggedIn, (req, res) => {
+    app.post('/location/register', secured(), (req, res) => {
         var data = {};
         data.latitude = req.body.latitude;
         data.longitude = req.body.longitude;
@@ -66,14 +99,11 @@ module.exports = (app, passport) => {
         });
     });
 
-    app.get('/location/register', isLoggedIn, (req, res) => {
+    app.get('/location/register', secured(), (req, res) => {
         res.redirect("/location");
     });
 };
 
 function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()){
-        return next();
-    }
-    return res.redirect('/');
+    return secured();
 }
