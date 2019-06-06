@@ -4,7 +4,7 @@ LABEL version="1.0"
 LABEL description="Geolocalization App"
 LABEL maintainer="Anderson Grajales - agrajal7@eafit.edu.co"
 
-ARG PORT=3000
+ARG PORT=80
 ENV PORT $PORT
 ENV AWS=1
 
@@ -16,5 +16,5 @@ COPY . ./
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 80
 CMD npm run prod
