@@ -75,6 +75,8 @@
 ![alt text](arquitecture.PNG)
 
 ## Google Cloud
+![alt text](arquitecture2.PNG)
+
 
 # 4. Desplegar en el DCA y en AWS
 
