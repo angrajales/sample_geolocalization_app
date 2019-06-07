@@ -16,8 +16,9 @@ const AuthStrategy = require('passport-auth0').Strategy;
 const userInViews = require('./config/userInViews');
 
 const dbconf = require('./config/db');
-console.log(process.env['NODE_ENV']);
-const enviroment = process.env['NODE_ENV'] || "dev";
+const enviroment = "prod";
+
+console.log(enviroment);
 
 var url = dbconf[enviroment].url;
 mongoose.connect(url, function(err){
