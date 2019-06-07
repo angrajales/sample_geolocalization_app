@@ -1,5 +1,7 @@
 # Proyecto 4 - Aplicación de Geolocalización
 ## By: Anderson Grajales - agrajal7@eafit.edu.co
+##     Hamilton Tobón - htobonm@eafit.edu.co
+##     Julian Sánchez - jsanch89@eafit.edu.co
 ## 2019-1
 ## Descripción
 Ésta aplicación permite a sus usuarios llevar un registro de todos aquellos lugares que han visitado. Además, el usuario tiene la posibilidad de visualizarlos en un mapa que es cargado una vez el usuario está registrado.
