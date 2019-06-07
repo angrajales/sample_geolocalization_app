@@ -69,7 +69,14 @@
 - Framework de Diseño [Bootstrap 4](https://getbootstrap.com/).
 - Base de Datos [Mongo DB](https://www.mongodb.com/es).
 - Contenedor [Docker](https://www.docker.com/).
-# 3. Desplegar en el DCA y en AWS
+# 3. Arquitectura
+
+## Diseño
+
+
+## Google Cloud
+
+# 4. Desplegar en el DCA y en AWS
 
 ## Instalación
 
@@ -134,6 +141,7 @@ O si quieres que se ejecute en modo `detach`:
 ```
 user1$ docker-compose up -d
 ```
+
 
 
 
