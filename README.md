@@ -72,7 +72,7 @@
 # 3. Arquitectura
 
 ## Diseño
-
+![alt text](arquitecture.PNG)
 
 ## Google Cloud
 
