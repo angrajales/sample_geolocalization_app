@@ -4,7 +4,10 @@
 ##     Julian Sánchez - jsanch89@eafit.edu.co
 ## 2019-1
 ## Descripción
-Ésta aplicación permite a sus usuarios llevar un registro de todos aquellos lugares que han visitado. Además, el usuario tiene la posibilidad de visualizarlos en un mapa que es cargado una vez el usuario está registrado.
+Ésta aplicación permite a sus usuarios llevar un registro de todos aquellos lugares que han visitado. Además, el usuario tiene la posibilidad de visualizarlos en un mapa que es cargado una vez el usuario está registrado. La aplicación se puede econtrar en el 
+siguiente enlance:
+
+http://geolocalization-app.cf
 
 # 1. Análisis y Diseño
 
